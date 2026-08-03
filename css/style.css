@@ -1,0 +1,869 @@
+/* ==========================================================================
+   EURO-PARTNER — one-page site styles
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS variables (design tokens)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Colors */
+  --color-bg: #faf8f4;
+  --color-bg-alt: #f1efe9;
+  --color-card: #ffffff;
+  --color-header: #2b2b2e;
+  --color-graphite: #28282b;
+  --color-footer: #1c1c1e;
+
+  --color-gold: #c9a227;
+  --color-gold-hover: #e0b640;
+  --color-gold-dark: #a8871f;
+
+  --color-text-heading: #1c1c1e;
+  --color-text-body: #45443f;
+  --color-text-muted: #55534d;
+
+  --color-text-on-dark-1: #e7e5e1; /* nav links, footer contact links */
+  --color-text-on-dark-2: #d8d6d1; /* hero lead */
+  --color-text-on-dark-3: #cfcdc8; /* CTA text, badge label, footer */
+  --color-text-on-dark-4: #a9a7a1; /* footer address */
+  --color-text-on-dark-5: #8a887f; /* footer note */
+  --color-text-on-dark-6: #7d7b75; /* footer bottom bar */
+
+  --color-line-light: #e8e5dd;
+  --color-line-dark: #333234;
+
+  /* Typography */
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+
+  /* Radii */
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+
+  /* Shadows */
+  --shadow-header: 0 1px 0 rgba(255, 255, 255, 0.06);
+  --shadow-card: 0 10px 30px -18px rgba(28, 28, 30, 0.25);
+  --shadow-image: 0 24px 60px -20px rgba(28, 28, 30, 0.35);
+  --shadow-badge: 0 12px 30px -12px rgba(0, 0, 0, 0.4);
+
+  /* Motion */
+  --transition-base: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+
+  /* Layout */
+  --container-max: 1280px;
+  --section-pad-x-desktop: 48px;
+  --section-pad-x-mobile: 20px;
+  --header-scroll-offset: 96px;
+  --header-height: 92px;
+  --header-height-mobile: 88px;
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & base
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding-top: var(--header-height);
+  background: var(--color-bg);
+  color: var(--color-text-heading);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--color-gold);
+  text-decoration: none;
+  transition: var(--transition-base);
+}
+
+a:hover {
+  color: var(--color-gold-dark);
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Visible focus state for all interactive elements */
+a:focus-visible,
+button:focus-visible,
+iframe:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+/* Skip link: visually hidden until keyboard focus */
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 12px;
+  z-index: 100;
+  background: var(--color-gold);
+  color: var(--color-graphite);
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  transition: top 0.18s ease;
+}
+
+.skip-link:focus-visible {
+  top: 12px;
+}
+
+/* Anchor targets scroll clear of the sticky header */
+#o-nas,
+#uslugi,
+#dlaczego-my,
+#kontakt {
+  scroll-margin-top: var(--header-scroll-offset);
+}
+
+/* --------------------------------------------------------------------------
+   3. Eyebrow (kicker with gold rule)
+   -------------------------------------------------------------------------- */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.eyebrow--center {
+  justify-content: center;
+}
+
+.eyebrow__line {
+  width: 34px;
+  height: 1.5px;
+  background: var(--color-gold);
+  flex-shrink: 0;
+}
+
+.eyebrow__text {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-gold-dark);
+}
+
+.eyebrow--on-dark .eyebrow__text {
+  color: var(--color-gold);
+}
+
+/* --------------------------------------------------------------------------
+   4. Buttons
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-block;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  transition: var(--transition-base);
+}
+
+.btn--gold {
+  background: var(--color-gold);
+  color: var(--color-graphite);
+}
+
+.btn--gold:hover {
+  background: var(--color-gold-hover);
+  color: var(--color-graphite);
+}
+
+.btn--outline {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+.btn--outline:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+/* --------------------------------------------------------------------------
+   5. Header / nav
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: var(--color-header);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px var(--section-pad-x-desktop);
+  box-shadow: var(--shadow-header);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand__logo {
+  height: 68px;
+  width: 68px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  display: block;
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.brand__name {
+  font-family: var(--font-serif);
+  font-size: 21px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.2px;
+}
+
+.brand__owner {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--color-gold);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+
+.nav-links a {
+  color: var(--color-text-on-dark-1);
+  font-size: 14.5px;
+  white-space: nowrap;
+}
+
+.nav-links a:hover {
+  color: var(--color-gold);
+}
+
+.nav-links .btn-phone {
+  color: var(--color-header);
+  background: var(--color-gold);
+  padding: 10px 20px;
+  font-size: 14px;
+  transition: background-color 1s ease, color 1s ease, transform 1s ease;
+}
+
+.nav-links .btn-phone:hover {
+  background: var(--color-gold-hover);
+  color: var(--color-header);
+}
+
+.nav-links .btn-phone:active {
+  background: var(--color-graphite);
+  color: var(--color-gold);
+  transform: scale(0.95);
+}
+
+/* --------------------------------------------------------------------------
+   6. Hero
+   -------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  min-height: 640px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--section-pad-x-desktop);
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    100deg,
+    rgba(20, 20, 22, 0.92) 0%,
+    rgba(20, 20, 22, 0.78) 42%,
+    rgba(20, 20, 22, 0.42) 78%,
+    rgba(20, 20, 22, 0.2) 100%
+  );
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+  padding: 100px 0;
+}
+
+.hero-title {
+  color: #fff;
+  font-size: 50px;
+  line-height: 1.14;
+  font-weight: 600;
+}
+
+.hero-lead {
+  color: var(--color-text-on-dark-2);
+  font-size: 18px;
+  line-height: 1.65;
+  margin-top: 24px;
+  max-width: 560px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 38px;
+  flex-wrap: wrap;
+}
+
+.hero-actions .btn {
+  padding: 15px 30px;
+  font-size: 15px;
+}
+
+/* --------------------------------------------------------------------------
+   7. O nas
+   -------------------------------------------------------------------------- */
+.about {
+  padding: 120px var(--section-pad-x-desktop);
+  display: grid;
+  grid-template-columns: 1fr 0.86fr;
+  gap: 72px;
+  align-items: center;
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.about__title {
+  font-size: 34px;
+  color: var(--color-text-heading);
+  line-height: 1.25;
+  margin-bottom: 26px;
+}
+
+.about__text p {
+  font-size: 16.5px;
+  line-height: 1.8;
+  color: var(--color-text-body);
+  margin-bottom: 18px;
+}
+
+.about__text p:last-child {
+  margin-bottom: 0;
+}
+
+.about__media {
+  position: relative;
+}
+
+.about__image {
+  width: 100%;
+  height: 560px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-image);
+}
+
+.about__badge {
+  position: absolute;
+  bottom: -24px;
+  left: -24px;
+  background: var(--color-graphite);
+  color: #fff;
+  padding: 22px 26px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-badge);
+}
+
+.about__badge-year {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  color: var(--color-gold);
+  font-weight: 600;
+}
+
+.about__badge-label {
+  font-size: 12.5px;
+  color: var(--color-text-on-dark-3);
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   8. Usługi
+   -------------------------------------------------------------------------- */
+.services {
+  background: var(--color-bg-alt);
+  padding: 120px var(--section-pad-x-desktop);
+}
+
+.services__header {
+  text-align: center;
+}
+
+.services__title {
+  font-size: 34px;
+  text-align: center;
+  color: var(--color-text-heading);
+  margin-bottom: 16px;
+}
+
+.services__lead {
+  text-align: center;
+  font-size: 16.5px;
+  line-height: 1.75;
+  color: var(--color-text-muted);
+  max-width: 660px;
+  margin: 0 auto 64px;
+}
+
+.service-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.service-card {
+  background: var(--color-card);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.service-card__image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.service-card__body {
+  padding: 32px 28px;
+}
+
+.service-card__kicker {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  color: var(--color-gold-dark);
+  margin-bottom: 10px;
+}
+
+.service-card__title {
+  font-size: 21px;
+  color: var(--color-text-heading);
+  margin-bottom: 12px;
+}
+
+.service-card__text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+/* Fleet panel */
+.fleet-panel {
+  display: grid;
+  grid-template-columns: 0.95fr 1fr;
+  gap: 56px;
+  margin-top: 64px;
+  align-items: center;
+  background: var(--color-card);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.fleet-panel__image {
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  object-fit: cover;
+  display: block;
+}
+
+.fleet-panel__text {
+  padding: 56px 56px 56px 0;
+}
+
+.fleet-panel__kicker {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  color: var(--color-gold-dark);
+  margin-bottom: 12px;
+}
+
+.fleet-panel__title {
+  font-size: 28px;
+  line-height: 1.3;
+  color: var(--color-text-heading);
+  margin-bottom: 16px;
+}
+
+.fleet-panel__body {
+  font-size: 16.5px;
+  line-height: 1.8;
+  color: var(--color-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   9. Dlaczego my
+   -------------------------------------------------------------------------- */
+.why-us {
+  padding: 120px var(--section-pad-x-desktop);
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.why-us-grid {
+  display: grid;
+  grid-template-columns: 0.86fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.why-us__image {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-image);
+}
+
+.why-us__title {
+  font-size: 34px;
+  color: var(--color-text-heading);
+  margin-bottom: 38px;
+  line-height: 1.25;
+}
+
+.reasons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 34px 40px;
+}
+
+.reason {
+  border-top: 2px solid var(--color-gold);
+  padding-top: 16px;
+}
+
+.reason__title {
+  font-size: 17px;
+  line-height: 1.35;
+  color: var(--color-text-heading);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.reason__desc {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   10. CTA — Współpraca
+   -------------------------------------------------------------------------- */
+.cta-band {
+  background: var(--color-graphite);
+  padding: 96px var(--section-pad-x-desktop);
+  text-align: center;
+}
+
+.cta-band__inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.cta-band__title {
+  font-size: 32px;
+  color: #fff;
+  margin-bottom: 22px;
+  line-height: 1.3;
+}
+
+.cta-band__text {
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--color-text-on-dark-3);
+  margin-bottom: 38px;
+}
+
+.cta-band .btn {
+  padding: 16px 36px;
+  font-size: 15.5px;
+}
+
+/* --------------------------------------------------------------------------
+   11. Kontakt / stopka
+   -------------------------------------------------------------------------- */
+.site-footer {
+  background: var(--color-footer);
+  padding: 88px var(--section-pad-x-desktop) 40px;
+  color: var(--color-text-on-dark-3);
+}
+
+.footer-cols {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.1fr;
+  gap: 56px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.footer-brand__logo {
+  height: 44px;
+  width: 44px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+
+.footer-brand__name {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.footer-address {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--color-text-on-dark-4);
+}
+
+.footer-heading {
+  font-size: 12.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.footer-contact {
+  font-size: 15px;
+  line-height: 2;
+}
+
+.footer-contact a {
+  color: var(--color-text-on-dark-1);
+}
+
+.footer-note {
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--color-text-on-dark-5);
+  margin-top: 26px;
+}
+
+.footer-map {
+  width: 100%;
+  height: 190px;
+  border: 0;
+  border-radius: var(--radius-md);
+  filter: grayscale(0.3) contrast(1.05);
+}
+
+.footer-bottom {
+  max-width: var(--container-max);
+  margin: 64px auto 0;
+  padding-top: 26px;
+  border-top: 1px solid var(--color-line-dark);
+  font-size: 13px;
+  color: var(--color-text-on-dark-6);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   12. Reveal animation (unused by default — declared for optional use)
+   -------------------------------------------------------------------------- */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   13. Responsive — breakpoint 1040px
+   -------------------------------------------------------------------------- */
+@media (max-width: 1040px) {
+  .nav-links {
+    gap: 22px;
+  }
+
+  .nav-links a {
+    font-size: 13.5px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   14. Responsive — breakpoint 820px (mobile)
+   -------------------------------------------------------------------------- */
+@media (max-width: 820px) {
+  body {
+    padding-top: var(--header-height-mobile);
+  }
+
+  .site-header {
+    padding: 10px 18px;
+  }
+
+  .nav-links {
+    gap: 14px;
+  }
+
+  .nav-links a:not(:last-child) {
+    display: none;
+  }
+
+  .hero {
+    padding: 0 var(--section-pad-x-mobile);
+    min-height: 520px;
+  }
+
+  .hero__content {
+    padding: 80px 0 64px;
+  }
+
+  .hero-title {
+    font-size: 32px;
+  }
+
+  .about,
+  .why-us-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about {
+    padding: 64px var(--section-pad-x-mobile);
+  }
+
+  .about__image {
+    height: 340px;
+  }
+
+  .why-us__image {
+    height: 280px;
+  }
+
+  .services,
+  .why-us,
+  .cta-band {
+    padding: 64px var(--section-pad-x-mobile);
+  }
+
+  .why-us-grid {
+    padding: 0;
+  }
+
+  .service-cards,
+  .fleet-panel,
+  .reasons-grid,
+  .footer-cols {
+    grid-template-columns: 1fr;
+  }
+
+  .fleet-panel {
+    gap: 0;
+  }
+
+  .fleet-panel__image {
+    min-height: 240px;
+    height: 240px;
+  }
+
+  .fleet-panel__text {
+    padding: 32px 24px 40px;
+  }
+
+  .reasons-grid {
+    gap: 24px;
+  }
+
+  .footer-cols {
+    gap: 36px;
+  }
+
+  .site-footer {
+    padding: 56px var(--section-pad-x-mobile) 32px;
+  }
+
+  .footer-bottom {
+    margin-top: 40px;
+    flex-direction: column;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+}
