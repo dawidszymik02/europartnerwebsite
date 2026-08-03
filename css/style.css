@@ -54,9 +54,8 @@
   --container-max: 1280px;
   --section-pad-x-desktop: 48px;
   --section-pad-x-mobile: 20px;
-  --header-scroll-offset: 96px;
-  --header-height: 92px;
-  --header-height-mobile: 88px;
+  --header-height: 101px;
+  --header-height-mobile: 97px;
 }
 
 /* --------------------------------------------------------------------------
@@ -145,12 +144,12 @@ iframe:focus-visible {
   top: 12px;
 }
 
-/* Anchor targets scroll clear of the sticky header */
+/* Anchor targets scroll clear of the fixed header */
 #o-nas,
 #uslugi,
 #dlaczego-my,
 #kontakt {
-  scroll-margin-top: var(--header-scroll-offset);
+  scroll-margin-top: calc(var(--header-height) - 4px);
 }
 
 /* --------------------------------------------------------------------------
@@ -229,7 +228,7 @@ iframe:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px var(--section-pad-x-desktop);
+  padding: 10px var(--section-pad-x-desktop);
   box-shadow: var(--shadow-header);
 }
 
@@ -239,9 +238,13 @@ iframe:focus-visible {
   gap: 12px;
 }
 
+.brand picture {
+  flex-shrink: 0;
+}
+
 .brand__logo {
-  height: 68px;
-  width: 68px;
+  height: 81px;
+  width: 81px;
   object-fit: cover;
   border-radius: var(--radius-md);
   display: block;
@@ -309,7 +312,8 @@ iframe:focus-visible {
    -------------------------------------------------------------------------- */
 .hero {
   position: relative;
-  min-height: 640px;
+  height: calc(100vh - var(--header-height));
+  min-height: 480px;
   display: flex;
   align-items: center;
   padding: 0 var(--section-pad-x-desktop);
@@ -444,7 +448,7 @@ iframe:focus-visible {
    -------------------------------------------------------------------------- */
 .services {
   background: var(--color-bg-alt);
-  padding: 120px var(--section-pad-x-desktop);
+  padding: 60px var(--section-pad-x-desktop) 120px;
 }
 
 .services__header {
@@ -512,12 +516,19 @@ iframe:focus-visible {
   color: var(--color-text-muted);
 }
 
-/* Fleet panel */
+/* --------------------------------------------------------------------------
+   8b. Nowoczesna flota (przerywnik między Usługi a Dlaczego my)
+   -------------------------------------------------------------------------- */
+.fleet-section {
+  padding: 96px var(--section-pad-x-desktop);
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
 .fleet-panel {
   display: grid;
   grid-template-columns: 0.95fr 1fr;
   gap: 56px;
-  margin-top: 64px;
   align-items: center;
   background: var(--color-card);
   border-radius: var(--radius-md);
@@ -616,7 +627,7 @@ iframe:focus-visible {
 }
 
 /* --------------------------------------------------------------------------
-   10. CTA — Współpraca
+   10. CTA — Współpraca / Kontakt
    -------------------------------------------------------------------------- */
 .cta-band {
   background: var(--color-graphite);
@@ -649,11 +660,11 @@ iframe:focus-visible {
 }
 
 /* --------------------------------------------------------------------------
-   11. Kontakt / stopka
+   11. Stopka
    -------------------------------------------------------------------------- */
 .site-footer {
   background: var(--color-footer);
-  padding: 88px var(--section-pad-x-desktop) 40px;
+  padding: 56px var(--section-pad-x-desktop) 40px;
   color: var(--color-text-on-dark-3);
 }
 
@@ -719,7 +730,7 @@ iframe:focus-visible {
 
 .footer-map {
   width: 100%;
-  height: 190px;
+  height: 140px;
   border: 0;
   border-radius: var(--radius-md);
   filter: grayscale(0.3) contrast(1.05);
@@ -773,8 +784,15 @@ iframe:focus-visible {
     padding-top: var(--header-height-mobile);
   }
 
+  #o-nas,
+  #uslugi,
+  #dlaczego-my,
+  #kontakt {
+    scroll-margin-top: calc(var(--header-height-mobile) - 4px);
+  }
+
   .site-header {
-    padding: 10px 18px;
+    padding: 8px 18px;
   }
 
   .nav-links {
@@ -787,7 +805,8 @@ iframe:focus-visible {
 
   .hero {
     padding: 0 var(--section-pad-x-mobile);
-    min-height: 520px;
+    height: calc(100dvh - var(--header-height-mobile));
+    min-height: 420px;
   }
 
   .hero__content {
@@ -816,9 +835,13 @@ iframe:focus-visible {
     height: 280px;
   }
 
-  .services,
+  .services {
+    padding: 32px var(--section-pad-x-mobile) 64px;
+  }
+
   .why-us,
-  .cta-band {
+  .cta-band,
+  .fleet-section {
     padding: 64px var(--section-pad-x-mobile);
   }
 
@@ -855,7 +878,7 @@ iframe:focus-visible {
   }
 
   .site-footer {
-    padding: 56px var(--section-pad-x-mobile) 32px;
+    padding: 40px var(--section-pad-x-mobile) 32px;
   }
 
   .footer-bottom {
