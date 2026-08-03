@@ -379,7 +379,7 @@ iframe:focus-visible {
    7. O nas
    -------------------------------------------------------------------------- */
 .about {
-  padding: 120px var(--section-pad-x-desktop);
+  padding: 60px var(--section-pad-x-desktop) 120px;
   display: grid;
   grid-template-columns: 1fr 0.86fr;
   gap: 72px;
@@ -824,7 +824,7 @@ iframe:focus-visible {
   }
 
   .about {
-    padding: 64px var(--section-pad-x-mobile);
+    padding: 32px var(--section-pad-x-mobile) 64px;
   }
 
   .about__image {
